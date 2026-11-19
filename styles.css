@@ -1,0 +1,464 @@
+/* 1930s cinema: ink-brown screen, film grain, Art Deco titles, film-countdown frames. */
+
+:root {
+  --ink: #120c08;
+  --ink-2: #1e140d;
+  --paper: #f1e4c6;
+  --gold: #f2b63c;
+  --gold-2: #ffd978;
+  --red: #c8282e;
+  --red-2: #8e1a1f;
+  --blue: #1f3f8c;
+  --text: #f6ead0;
+  --muted: #cdb98f;
+  --line: rgba(242, 182, 60, 0.35);
+  --hair: rgba(18, 12, 8, 0.55);
+
+  --title: "Limelight", Georgia, serif;
+  --toon: "Fredoka", "Trebuchet MS", sans-serif;
+  --type: "Special Elite", "Courier New", monospace;
+
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100svh;
+  margin: 0;
+  background-color: var(--ink);
+  background-image: radial-gradient(1200px 700px at 50% -10%, #3a2412 0%, var(--ink) 60%);
+  background-repeat: no-repeat;
+  color: var(--text);
+  font-family: var(--toon);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+}
+
+:focus-visible {
+  outline: 3px solid var(--gold-2);
+  outline-offset: 3px;
+}
+
+/* Projector texture */
+
+.grain {
+  position: fixed;
+  inset: -50%;
+  z-index: 53;
+  pointer-events: none;
+  opacity: 0.09;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>");
+  animation: grain 0.9s steps(5) infinite;
+}
+
+@keyframes grain {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-3%, 2%); }
+  50% { transform: translate(2%, -3%); }
+  75% { transform: translate(-2%, -1%); }
+  100% { transform: translate(1%, 3%); }
+}
+
+.vignette {
+  position: fixed;
+  inset: 0;
+  z-index: 51;
+  pointer-events: none;
+  box-shadow: inset 0 0 clamp(80px, 16vw, 180px) clamp(10px, 3vw, 40px) rgba(0, 0, 0, 0.75);
+}
+
+/* Language switch */
+
+.top {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem clamp(1rem, 4vw, 2rem) 0;
+}
+
+.lang {
+  display: inline-flex;
+  gap: 0.35rem;
+}
+
+.lang button {
+  padding: 0.45rem 0.8rem;
+  border: 2.4px solid transparent;
+  border-radius: 10px;
+  background: none;
+  color: var(--text);
+  font: 600 0.9375rem/1 var(--toon);
+  letter-spacing: 0.03em;
+  cursor: pointer;
+}
+
+.lang button:hover {
+  color: var(--gold-2);
+}
+
+.lang button[aria-pressed="true"] {
+  border-color: var(--ink);
+  background: linear-gradient(var(--gold), #b9741c);
+  box-shadow: 0 4px 0 var(--ink);
+  color: var(--ink);
+}
+
+/* Countdown */
+
+.hero {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: clamp(1.5rem, 5vh, 3rem) clamp(1rem, 4vw, 2rem);
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0 0 1rem;
+  color: var(--muted);
+  font-family: var(--type);
+  font-size: 0.8125rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.display {
+  margin: 0;
+  color: var(--paper);
+  font-family: var(--title);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  text-shadow: 0.055em 0.055em 0 var(--red-2), 0.11em 0.11em 0 rgba(0, 0, 0, 0.5);
+  text-wrap: balance;
+}
+
+.headline {
+  font-size: clamp(2.4rem, 0.9rem + 6.4vw, 6.5rem);
+}
+
+.tail {
+  color: var(--gold-2);
+  font-size: clamp(1.6rem, 0.9rem + 2.6vw, 3.25rem);
+}
+
+.dials {
+  display: flex;
+  justify-content: center;
+  gap: clamp(0.75rem, 3vw, 2.25rem);
+  margin: clamp(1.75rem, 4.5vh, 3rem) 0;
+}
+
+.dial {
+  --dial: clamp(5.75rem, 26vw, 11rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+/* Film-countdown frame: sepia stock with crosshairs */
+.dial__screen {
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  width: var(--dial);
+  aspect-ratio: 1;
+  border: 2.4px solid var(--ink);
+  border-radius: 14px;
+  background: radial-gradient(circle, #e9dcc0 0%, #b9a780 70%, #6f6248 100%);
+  box-shadow: 0 0 0 2px var(--line), 0 20px 40px rgba(0, 0, 0, 0.45);
+}
+
+.dial__screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(var(--hair), var(--hair)) 50% 0 / 1.5px 100% no-repeat,
+    linear-gradient(var(--hair), var(--hair)) 0 50% / 100% 1.5px no-repeat;
+}
+
+/* The shaded wedge is the share of the day/hour/minute still to go. */
+.dial__ring {
+  position: absolute;
+  inset: 8%;
+  border: calc(var(--dial) * 0.028) solid var(--ink);
+  border-radius: 50%;
+  background: conic-gradient(rgba(18, 12, 8, 0.34) var(--p, 0%), transparent 0);
+}
+
+.dial__ring::after {
+  content: "";
+  position: absolute;
+  inset: 9%;
+  border: 1.5px solid rgba(18, 12, 8, 0.7);
+  border-radius: 50%;
+}
+
+.dial__num {
+  position: relative;
+  color: var(--ink);
+  font-family: var(--title);
+  font-size: calc(var(--dial) * 0.38);
+  line-height: 1;
+  text-shadow: 0.04em 0.04em 0 rgba(241, 228, 198, 0.6);
+}
+
+.dial__label {
+  color: var(--muted);
+  font-family: var(--type);
+  font-size: 0.875rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* Loading bar: the term so far, with the president walking toward the exit */
+
+.loader {
+  position: relative;
+  z-index: 52;
+  width: 100%;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 2rem) clamp(1.25rem, 3vh, 2rem);
+}
+
+.loader__stage {
+  --walker-h: clamp(8rem, 5rem + 7vw, 13.5rem);
+  position: relative;
+  padding-top: var(--walker-h);
+}
+
+.loader__track {
+  position: relative;
+  height: 22px;
+  border: 2.4px solid var(--ink);
+  border-radius: 999px;
+  background: var(--ink-2);
+  box-shadow: 0 0 0 2px var(--line), inset 0 3px 6px rgba(0, 0, 0, 0.6);
+}
+
+.loader__fill {
+  width: var(--pct, 0%);
+  min-width: 14px;
+  height: 100%;
+  border-radius: inherit;
+  background: repeating-linear-gradient(-45deg, var(--gold) 0 10px, #c98a24 10px 20px);
+  background-size: 28.28px 100%;
+  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.18), inset 0 2px 0 rgba(255, 255, 255, 0.25);
+  animation: crawl 1.2s linear infinite;
+}
+
+@keyframes crawl {
+  to { background-position: 28.28px 0; }
+}
+
+.walker {
+  position: absolute;
+  bottom: 20px; /* feet on the top edge of the track */
+  left: clamp(3rem, var(--pct, 0%), calc(100% - 3rem));
+  transform: translateX(-50%);
+}
+
+.pres {
+  display: block;
+  height: var(--walker-h);
+  overflow: visible;
+  /* A faint warm rim light keeps the black hair and beard readable on the dark screen. */
+  filter: drop-shadow(0 0 1px rgba(255, 217, 120, 0.55)) drop-shadow(0 3px 0 rgba(0, 0, 0, 0.45));
+}
+
+.door {
+  position: absolute;
+  right: 0.4rem;
+  bottom: calc(22px + 0.15rem);
+  height: calc(var(--walker-h) * 0.42);
+  filter: drop-shadow(0 0 12px rgba(255, 217, 120, 0.45));
+}
+
+.loader__meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  margin-top: 0.85rem;
+  font-family: var(--type);
+  font-size: 0.875rem;
+  letter-spacing: 0.08em;
+}
+
+.loader__label {
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.loader__pct {
+  color: var(--gold-2);
+  font-variant-numeric: tabular-nums;
+}
+
+/* The president, as a felt puppet: business suit, a forehead that goes on for days. */
+
+.pres__shadow { fill: rgba(0, 0, 0, 0.45); }
+.pres__trouser { fill: none; stroke: #2b3550; stroke-width: 6; stroke-linecap: round; }
+.pres__shoe { fill: #24180f; }
+.pres__sleeve { fill: none; stroke: #3f4c6a; stroke-width: 6; stroke-linecap: round; }
+.pres__cuff { fill: none; stroke: #f6f1e4; stroke-width: 2; stroke-linecap: round; }
+.pres__hand { fill: url(#g-skin); stroke: rgba(120, 70, 40, 0.55); stroke-width: 0.8; }
+.pres__suit { fill: url(#g-suit); }
+.pres__shirt { fill: #f6f1e4; }
+.pres__tie { fill: #b5242b; }
+.pres__lapel { fill: #26304a; stroke: rgba(0, 0, 0, 0.25); stroke-width: 0.6; }
+.pres__button { fill: #1b120c; }
+.pres__hair { fill: #1b1410; }
+.pres__skin { fill: url(#g-skin); }
+.pres__line { fill: none; stroke: rgba(120, 70, 40, 0.4); stroke-width: 1.1; stroke-linecap: round; }
+.pres__beard { fill: #1f1712; }
+.pres__brow { fill: none; stroke: #1b120c; stroke-width: 2.6; stroke-linecap: round; }
+.pres__eye { fill: #fbf6ea; }
+.pres__pupil { fill: #1b120c; }
+.pres__lid { fill: #d39a6c; stroke: #1b120c; stroke-width: 0.8; }
+.pres__nose { fill: #d39a6c; stroke: rgba(120, 70, 40, 0.55); stroke-width: 0.8; }
+.pres__nostril { fill: #7a4a2e; }
+.pres__lips { fill: #7b3f8e; }
+.pres__lip-line { fill: none; stroke: #4a2056; stroke-width: 0.9; stroke-linecap: round; }
+.pres__glint { fill: #fff; }
+
+/* Walk cycle: legs stride, the raised finger wags, the head sways. */
+
+.pres__leg--a { transform-origin: 40px 154px; animation: stride 0.45s ease-in-out infinite alternate; }
+.pres__leg--b { transform-origin: 50px 154px; animation: stride 0.45s ease-in-out infinite alternate-reverse; }
+.pres__arm--back { transform-origin: 34px 131px; animation: swing 0.45s ease-in-out infinite alternate; }
+.pres__arm--front { transform-origin: 56px 131px; animation: wag 0.45s ease-in-out infinite alternate; }
+.pres__body { animation: bob 0.225s ease-in-out infinite alternate; }
+.pres__head { transform-origin: 45px 126px; animation: wobble 0.9s ease-in-out infinite alternate; }
+.pres__glint {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: glint 3.2s ease-in-out infinite;
+}
+
+@keyframes stride {
+  from { transform: rotate(20deg); }
+  to { transform: rotate(-20deg); }
+}
+
+@keyframes swing {
+  from { transform: rotate(-26deg); }
+  to { transform: rotate(26deg); }
+}
+
+@keyframes bob {
+  from { transform: translateY(0); }
+  to { transform: translateY(-2.5px); }
+}
+
+@keyframes wobble {
+  from { transform: rotate(-2.5deg); }
+  to { transform: rotate(2.5deg); }
+}
+
+@keyframes wag {
+  from { transform: rotate(-5deg); }
+  to { transform: rotate(5deg); }
+}
+
+/* Speech bubble: pops in, holds, fades; the text changes while it's hidden. */
+
+.bubble {
+  position: absolute;
+  bottom: 66%;
+  left: calc(100% - 0.4rem);
+  z-index: 1;
+  width: max-content;
+  max-width: 12.5rem;
+  margin: 0;
+  padding: 0.45rem 0.8rem 0.5rem;
+  border: 2.4px solid var(--ink);
+  border-radius: 16px;
+  background: var(--paper);
+  box-shadow: 0 4px 0 var(--ink);
+  color: var(--ink);
+  font: 700 clamp(0.875rem, 0.78rem + 0.35vw, 1.05rem) / 1.2 var(--toon);
+  text-align: left;
+  transform-origin: 0 100%;
+  animation: pop 3.8s ease-in-out infinite;
+}
+
+/* Tail: an ink triangle with a paper one inside it, pointing down at his face. */
+.bubble::before,
+.bubble::after {
+  content: "";
+  position: absolute;
+  border-style: solid;
+  border-color: transparent;
+}
+
+.bubble::before {
+  left: 12px;
+  bottom: -17px;
+  border-width: 17px 17px 0 0;
+  border-top-color: var(--ink);
+}
+
+.bubble::after {
+  left: 15px;
+  bottom: -10.6px;
+  border-width: 13px 13px 0 0;
+  border-top-color: var(--paper);
+}
+
+/* Near the exit door, the bubble moves to his other side. */
+.walker.is-late .bubble {
+  right: calc(100% - 0.4rem);
+  left: auto;
+  transform-origin: 100% 100%;
+}
+
+.walker.is-late .bubble::before {
+  right: 12px;
+  left: auto;
+  border-width: 17px 0 0 17px;
+}
+
+.walker.is-late .bubble::after {
+  right: 15px;
+  left: auto;
+  border-width: 13px 0 0 13px;
+}
+
+@keyframes pop {
+  0% { opacity: 0; transform: scale(0.4) rotate(-6deg); }
+  8% { opacity: 1; transform: scale(1.08) rotate(2deg); }
+  13% { opacity: 1; transform: scale(1) rotate(0deg); }
+  86% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.85); }
+}
+
+@keyframes glint {
+  0%, 78%, 100% { opacity: 0; transform: scale(0.2) rotate(0deg); }
+  86% { opacity: 1; transform: scale(1.15) rotate(45deg); }
+  94% { opacity: 0; transform: scale(0.2) rotate(90deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grain,
+  .loader__fill,
+  .bubble,
+  .pres * {
+    animation: none !important;
+  }
+}

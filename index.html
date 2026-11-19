@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cuenta regresiva: fin del mandato presidencial</title>
+  <meta name="description" content="Cuánto falta para que termine el actual gobierno de Colombia.">
+  <meta name="theme-color" content="#120c08">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23120c08'/%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='%23f2b63c' stroke-width='3'/%3E%3Cpath d='M16 3v26M3 16h26' stroke='%23f2b63c' stroke-width='1.5'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Limelight&family=Fredoka:wght@400;600;700&family=Special+Elite&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <header class="top">
+    <div class="lang" role="group" aria-label="Idioma / Language">
+      <button type="button" data-lang="es" aria-pressed="true">ES</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </header>
+
+  <main class="hero" role="timer" aria-labelledby="headline">
+    <p class="eyebrow" id="eyebrow">Fin del mandato presidencial · 7 de agosto de 2030</p>
+    <h1 class="display headline" id="headline">7 de agosto de 2030</h1>
+
+    <div class="dials">
+      <div class="dial" data-unit="h">
+        <div class="dial__screen"><span class="dial__ring"></span><span class="dial__num">--</span></div>
+        <span class="dial__label">horas</span>
+      </div>
+      <div class="dial" data-unit="m">
+        <div class="dial__screen"><span class="dial__ring"></span><span class="dial__num">--</span></div>
+        <span class="dial__label">minutos</span>
+      </div>
+      <div class="dial" data-unit="s">
+        <div class="dial__screen"><span class="dial__ring"></span><span class="dial__num">--</span></div>
+        <span class="dial__label">segundos</span>
+      </div>
+    </div>
+
+    <p class="display tail" id="tail">para que termine este gobierno.</p>
+  </main>
+
+  <footer class="loader" id="loader">
+    <div class="loader__stage">
+      <div class="walker" id="walker" aria-hidden="true">
+        <p class="bubble" id="bubble"><span id="bubble-text">¡Firme por la patria!</span></p>
+
+        <!-- Felt-puppet caricature: business suit, very tall forehead. -->
+        <svg class="pres" viewBox="0 0 100 184">
+          <defs>
+            <filter id="felt" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB">
+              <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" seed="4" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.4" xChannelSelector="R" yChannelSelector="G" result="fuzz"/>
+              <feColorMatrix in="noise" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 -0.2" result="fibres"/>
+              <feComposite in="fibres" in2="fuzz" operator="in" result="speck"/>
+              <feMerge><feMergeNode in="fuzz"/><feMergeNode in="speck"/></feMerge>
+            </filter>
+            <radialGradient id="g-skin" cx="0.42" cy="0.3" r="0.75">
+              <stop offset="0" stop-color="#f2cda6"/>
+              <stop offset="0.6" stop-color="#dca577"/>
+              <stop offset="1" stop-color="#b47a50"/>
+            </radialGradient>
+            <linearGradient id="g-suit" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#4b5a7a"/>
+              <stop offset="1" stop-color="#2b3550"/>
+            </linearGradient>
+          </defs>
+
+          <ellipse class="pres__shadow" cx="47" cy="181" rx="19" ry="2.6"/>
+
+          <g filter="url(#felt)">
+            <g class="pres__leg pres__leg--a">
+              <path class="pres__trouser" d="M40 154 L40 173"/>
+              <ellipse class="pres__shoe" cx="43.5" cy="177.5" rx="7.5" ry="4.2"/>
+            </g>
+            <g class="pres__leg pres__leg--b">
+              <path class="pres__trouser" d="M50 154 L50 173"/>
+              <ellipse class="pres__shoe" cx="53.5" cy="177.5" rx="7.5" ry="4.2"/>
+            </g>
+
+            <g class="pres__body">
+              <g class="pres__arm pres__arm--back">
+                <path class="pres__sleeve" d="M34 131 Q26 140 27 149"/>
+                <path class="pres__cuff" d="M24.6 148.6 L29.4 149.2"/>
+                <circle class="pres__hand" cx="27" cy="151.8" r="4.4"/>
+              </g>
+
+              <path class="pres__suit" d="M33 128 Q45 123 57 128 L59.5 157 Q45 160 30.5 157 Z"/>
+              <path class="pres__shirt" d="M39.5 125.5 L45 141 L50.5 125.5 Z"/>
+              <path class="pres__tie" d="M45 128 L43.3 131.3 L45 140.5 L46.7 131.3 Z"/>
+              <path class="pres__lapel" d="M39.5 125.5 L45 141 L41.2 141.5 L35.5 131 Z M50.5 125.5 L45 141 L48.8 141.5 L54.5 131 Z"/>
+              <circle class="pres__button" cx="45" cy="146" r="1"/>
+              <circle class="pres__button" cx="45" cy="151.5" r="1"/>
+              <rect x="37.4" y="133.2" width="3.2" height="1" fill="#f2c230"/>
+              <rect x="37.4" y="134.2" width="3.2" height="0.55" fill="#1f3f8c"/>
+              <rect x="37.4" y="134.75" width="3.2" height="0.55" fill="#c8282e"/>
+
+              <g class="pres__head">
+                <path class="pres__hair" d="M23.5 86 L23.5 30 C24 15 31 10.5 45 10.5 C59 10.5 66 15 66.5 30 L66.5 86 Z"/>
+                <ellipse class="pres__skin" cx="24.5" cy="96" rx="4" ry="6.5"/>
+                <ellipse class="pres__skin" cx="65.5" cy="96" rx="4" ry="6.5"/>
+                <path class="pres__skin" d="M45 14 C58 14 63 18 63.5 30 L64 90 C64 110 58 124 45 126 C32 124 26 110 26 90 L26.5 30 C27 18 32 14 45 14 Z"/>
+                <path class="pres__line" d="M33 52 Q45 48 57 52 M35 59 Q45 55.5 55 59"/>
+                <path class="pres__beard" d="M26 90 C25 108 32 126 45 130 C58 126 65 108 64 90 L62 90 C61 104 56 110 52 111 Q45 109 38 111 C34 110 29 104 28 90 Z"/>
+                <path class="pres__brow" d="M32 89.5 L41 92.5 M58 89.5 L49 92.5"/>
+                <ellipse class="pres__eye" cx="37" cy="97" rx="4.2" ry="3.4"/>
+                <ellipse class="pres__eye" cx="53" cy="97" rx="4.2" ry="3.4"/>
+                <circle class="pres__pupil" cx="38.4" cy="98" r="1.8"/>
+                <circle class="pres__pupil" cx="54.4" cy="98" r="1.8"/>
+                <path class="pres__lid" d="M32.8 97 A4.2 3.4 0 0 1 41.2 97 Z M48.8 97 A4.2 3.4 0 0 1 57.2 97 Z"/>
+                <ellipse class="pres__nose" cx="45" cy="106" rx="4.6" ry="4.2"/>
+                <circle class="pres__nostril" cx="43.3" cy="108.3" r="0.9"/>
+                <circle class="pres__nostril" cx="46.7" cy="108.3" r="0.9"/>
+                <path class="pres__beard" d="M35.5 112 Q45 107.5 54.5 112 Q50 114.5 45 113 Q40 114.5 35.5 112 Z"/>
+                <ellipse class="pres__lips" cx="45" cy="116.2" rx="6.2" ry="2.8"/>
+                <path class="pres__lip-line" d="M39.5 116.2 Q45 117.2 50.5 116.2"/>
+                <path class="pres__glint" d="M55 25 L56.5 29.5 L61 31 L56.5 32.5 L55 37 L53.5 32.5 L49 31 L53.5 29.5 Z"/>
+              </g>
+
+              <g class="pres__arm pres__arm--front">
+                <path class="pres__sleeve" d="M56 131 Q73 125 76 110"/>
+                <path class="pres__cuff" d="M73.4 110.9 L78.4 110.2"/>
+                <rect class="pres__hand" x="74.4" y="91" width="3.2" height="13" rx="1.6"/>
+                <circle class="pres__hand" cx="76" cy="106" r="4.4"/>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <svg class="door" viewBox="0 0 28 40" aria-hidden="true">
+        <rect x="2" y="2" width="24" height="37" fill="#ffd978"/>
+        <path d="M2 2 L15 6 L15 39 L2 39 Z" fill="#6b3a1e" stroke="#120c08" stroke-width="1.5" stroke-linejoin="round"/>
+        <rect x="2" y="2" width="24" height="37" fill="none" stroke="#f2b63c" stroke-width="2.4"/>
+        <circle cx="12" cy="23" r="1.4" fill="#f2b63c"/>
+      </svg>
+
+      <div class="loader__track" id="track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-labelledby="loader-label">
+        <div class="loader__fill"></div>
+      </div>
+    </div>
+
+    <div class="loader__meta">
+      <span class="loader__label" id="loader-label">Cargando el fin de este gobierno…</span>
+      <span class="loader__pct" id="pct"></span>
+    </div>
+  </footer>
+</body>
+</html>
